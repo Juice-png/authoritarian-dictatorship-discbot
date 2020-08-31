@@ -20,20 +20,20 @@ from discord.ext import commands
 
 class discBot():
     
-    def __init__(self):
+    def __init__(self): 
         self.trusted = [327318597632262149]
         @bot.event
-        async def on_ready():
+        async def on_ready():                                               #startup notification
             
             print('We have logged in as {0.user}'.format(bot))
             channelRecipient = bot.get_channel(749641829544230957)
             await channelRecipient.send('Bot online now.')
             
-    def readJson(self):
+    def readJson(self):                                                     #opens servers.json to read
         with open('servers.json', 'r') as openfile: 
             self.jsonDict = json.load(openfile)
             
-    def writeJson(self, dictName):
+    def writeJson(self, dictName):                                          #opens servers.json to write
         self.readJson()
         
         tempDict = dictName
@@ -45,11 +45,11 @@ class discBot():
         with open("servers.json", "w") as outfile: 
             outfile.write(json_object)
         
-    def trustedCommands(self):       
+    def trustedCommands(self):                                              #commands for the discord bot       
         @bot.command()
         async def bindserver(message):
             self.readJson()
-            if message.author.id in self.trusted:               
+            if message.author.id in self.trusted:                           #checks if the user who msged has permission to call the command           
                     
                 splitContent = message.message.content.split()
                 await message.channel.send('logging for {} binded to {}'.format(splitContent[1], message.channel)) 
